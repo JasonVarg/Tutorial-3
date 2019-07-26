@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
 
             if(gameOver)
             {
-                restartText.text = "Press 'R' for restart";
+                restartText.text = "Press 'Z' for restart";
                 restart = true;
 
                 break;
@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
     {
         if(restart)
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.Z))
             {
                 SceneManager.LoadScene("Main");
             }
@@ -117,3 +117,7 @@ public class GameController : MonoBehaviour
        gameOver = true;
     }
 }
+/*
+    _|_
+
+ */
