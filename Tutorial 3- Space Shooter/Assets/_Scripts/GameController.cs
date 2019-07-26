@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject hazard;
+    public GameObject[] hazards;
     public Vector3 spawnValues;
 
     public int hazardCount;
@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     public Text restartText;
     public Text gameOverText;
 
+    public Text winText;
+
     private bool gameOver;
     private bool restart;
     private int score;
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
 
        restartText.text = "";
        gameOverText.text = "";
+       winText.text = "";
 
        score = 0;
        UpdateScore();
@@ -44,6 +47,8 @@ public class GameController : MonoBehaviour
         {
             for (int i = 0; i < hazardCount; i++)
             {
+                GameObject hazard = hazards[Random.Range (0,hazards.Length)];
+
                 Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
                 Quaternion spawnRotation = Quaternion.identity;
 
@@ -83,7 +88,27 @@ public class GameController : MonoBehaviour
 
     void UpdateScore()
     {
-       ScoreText.text = "Score: " + score;
+       ScoreText.text = "Points: " + score;
+
+       if(score >=100)
+       {
+           winText.text = "YOU WIN";
+           
+           gameOver= true;
+           restart = true;
+
+           gameOverText.text = "Game created by Jason Vargas";
+       }
+
+       if(score == 145)
+       {
+           winText.text = "HEY!";
+
+            gameOver= true;
+            restart = true;
+
+           gameOverText.text= "Just couldn't stop playing huh?";
+       }
     } 
 
     public void GameOver()
