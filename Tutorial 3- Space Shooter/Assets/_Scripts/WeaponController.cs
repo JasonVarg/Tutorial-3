@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
 {
 
     public GameObject shot;
-    public Transform shotSpawn;
+    public Transform shotSpawn1, shotSpawn2;
     public float fireRate;
     public float delay;
 
@@ -22,7 +22,8 @@ public class WeaponController : MonoBehaviour
 
     void Fire()
     {
-        Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+        Instantiate (shot, shotSpawn1.position, shotSpawn1.rotation);
+        Instantiate (shot, shotSpawn2.position, shotSpawn2.rotation);
 
         audioSource.Play ();
     }

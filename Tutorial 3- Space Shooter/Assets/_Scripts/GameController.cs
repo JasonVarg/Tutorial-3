@@ -100,14 +100,14 @@ public class GameController : MonoBehaviour
            gameOverText.text = "Game created by Jason Vargas";
        }
 
-       if(score == 145)
+       if(score >= 170)
        {
-           winText.text = "HEY!";
+           winText.text = "YOU WIN!";
 
             gameOver= true;
             restart = true;
 
-           gameOverText.text= "Just couldn't stop playing huh?";
+           gameOverText.text= "You double Win!";
        }
     } 
 
