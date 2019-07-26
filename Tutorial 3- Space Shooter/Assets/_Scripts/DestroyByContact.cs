@@ -27,9 +27,12 @@ public class DestroyByContact : MonoBehaviour
     {
         Debug.Log(other.name);
 
-        if(other.tag == "Boundary") return;
+        if(other.CompareTag ("Boundary") || other.CompareTag("Enemy")) return;
 
-        Instantiate(explosion, transform.position, transform.rotation);
+        if(explosion != null)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+        }
         
         if(other.tag == "Player")
         {

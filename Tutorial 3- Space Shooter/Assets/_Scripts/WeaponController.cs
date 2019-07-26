@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WeaponController : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public GameObject shot;
+    public Transform shotSpawn;
+    public float fireRate;
+    public float delay;
+
+    private AudioSource audioSource;
+
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource> ();
+
+        InvokeRepeating ("Fire", delay, fireRate);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Fire()
     {
-        
+        Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+
+        audioSource.Play ();
     }
 }
