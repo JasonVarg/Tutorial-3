@@ -23,4 +23,9 @@ public class BG_Scroller : MonoBehaviour
         
         transform.position = startPos + Vector3.forward * newPosition;   
     }
+
+    public void speedUp()
+    {
+        scrollSpeed = -5;
+    }
 }

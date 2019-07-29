@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
     private bool restart;
     private int score;
 
+    private BG_Scroller background;
+
     void Start()
     {
        gameOver = false;
@@ -37,6 +39,18 @@ public class GameController : MonoBehaviour
        score = 0;
        UpdateScore();
        StartCoroutine (SpawnWaves());
+
+       GameObject backgroundObject = GameObject.FindWithTag("Background");
+
+        if(backgroundObject != null)
+        {
+            background = backgroundObject.GetComponent <BG_Scroller>();
+        }
+        
+        if (background == null)
+        {
+            Debug.Log("Cannot find 'background' script!");
+        }
     }
 
     IEnumerator SpawnWaves()
@@ -98,6 +112,8 @@ public class GameController : MonoBehaviour
            restart = true;
 
            gameOverText.text = "Game created by Jason Vargas";
+
+           background.speedUp();
        }
 
        if(score >= 170)

@@ -54,4 +54,9 @@ public class PlayerController : MonoBehaviour
 
           rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
      }
+
+     public void fireRatePowerUp()
+     {
+          fireRate = 0.125F;
+     }
 }
