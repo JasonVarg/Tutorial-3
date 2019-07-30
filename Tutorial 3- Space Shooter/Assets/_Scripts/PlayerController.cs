@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Boundary
@@ -11,30 +12,46 @@ public class PlayerController : MonoBehaviour
 {
      public float speed;
      public float tilt;
+     public int charges;
      public Boundary boundary;
-
      public GameObject shot;
      public Transform shotSpawn;
+     public Text chargesText;
      public float fireRate;
+     public float chargeRate;
+
      private float nextFire;
+     private float currentSpeed;
+     private float nextCharge;
      private Rigidbody rb;
      private AudioSource audioSource;
 
      private void Start()
      {
-        audioSource = GetComponent<AudioSource>();
-        rb = GetComponent<Rigidbody>();
+          currentSpeed = speed;
+          audioSource = GetComponent<AudioSource>();
+          rb = GetComponent<Rigidbody>();
      }
 
      void Update()
      {
-         if(Input.GetButton("Fire1") && Time.time > nextFire)
-         {
+          chargesText.text = "Charges: " + charges;
+          
+          if(Input.GetButton("Fire1") && Time.time > nextFire)
+          {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 
             audioSource.Play();
-         }
+          }
+
+          if(Input.GetKeyUp("x") && charges > 0 && Time.time > nextCharge)
+          {
+              nextCharge = Time.time + chargeRate; 
+              charges--;
+              
+              timeMode();
+          }
      }
      void FixedUpdate()
      {
@@ -54,4 +71,8 @@ public class PlayerController : MonoBehaviour
           rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
      }
    
+     void timeMode()
+     {
+          
+     }
 }

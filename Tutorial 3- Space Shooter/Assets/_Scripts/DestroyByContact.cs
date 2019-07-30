@@ -20,7 +20,7 @@ public class DestroyByContact : MonoBehaviour
         
         if (gameController == null)
         {
-            Debug.Log("Cannot find 'GameContrller' script!");
+            Debug.Log("Cannot find 'GameController' script!");
         }
     }
     void OnTriggerEnter(Collider other)
