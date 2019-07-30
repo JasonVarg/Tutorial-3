@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private PlayerController player;
+
+    private bool powerUpActive;
     void Start()
     {
-        
+  
     }
 
     // Update is called once per frame
@@ -15,4 +17,5 @@ public class PowerUp : MonoBehaviour
     {
         
     }
+
 }

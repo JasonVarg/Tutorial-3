@@ -21,11 +21,16 @@ public class GameController : MonoBehaviour
 
     public Text winText;
 
+    public AudioClip winMu;
+    public AudioClip lossMu;
+
     private bool gameOver;
     private bool restart;
     private int score;
 
     private BG_Scroller background;
+
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -35,6 +40,8 @@ public class GameController : MonoBehaviour
        restartText.text = "";
        gameOverText.text = "";
        winText.text = "";
+
+       audioSource = GetComponent<AudioSource>();
 
        score = 0;
        UpdateScore();
@@ -114,15 +121,14 @@ public class GameController : MonoBehaviour
            gameOverText.text = "Game created by Jason Vargas";
 
            background.speedUp();
+
+           audioSource.clip = winMu;
+           audioSource.Play();
        }
 
        if(score >= 170)
        {
            winText.text = "YOU WIN!";
-
-            gameOver= true;
-            restart = true;
-
            gameOverText.text= "You double Win!";
        }
     } 
@@ -131,6 +137,9 @@ public class GameController : MonoBehaviour
     {
        gameOverText.text = "GAME OVER!";
        gameOver = true;
+
+       audioSource.clip = lossMu;
+       audioSource.Play();
     }
 }
 /*
