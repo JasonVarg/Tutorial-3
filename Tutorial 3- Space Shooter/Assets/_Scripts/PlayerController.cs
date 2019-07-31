@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
 {
      public float speed;
      public float tilt;
+
+     public float chargeUpTime;
      public int charges;
      public Boundary boundary;
      public GameObject shot;
-     public Transform shotSpawn;
+     public Transform[] shotSpawns;
      public Text chargesText;
      public float fireRate;
      public float chargeRate;
@@ -25,33 +27,56 @@ public class PlayerController : MonoBehaviour
      private float nextCharge;
      private Rigidbody rb;
      private AudioSource audioSource;
+     private GameController gameController;
 
      private void Start()
      {
           currentSpeed = speed;
           audioSource = GetComponent<AudioSource>();
           rb = GetComponent<Rigidbody>();
+
+          GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+
+          if(gameControllerObject != null)
+          {
+               gameController = gameControllerObject.GetComponent <GameController>();
+          }
+        
+          if (gameController == null)
+          {
+               Debug.Log("Cannot find 'GameController' script!");
+          }
+          
      }
 
      void Update()
-     {
-          chargesText.text = "Charges: " + charges;
-          
+     {    
           if(Input.GetButton("Fire1") && Time.time > nextFire)
           {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            
+               foreach(var shotSpawn in shotSpawns)
+               {
+                    
+                    
+                    Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+                    
 
-            audioSource.Play();
+                    audioSource.Play();
+               }
           }
 
           if(Input.GetKeyUp("x") && charges > 0 && Time.time > nextCharge)
           {
               nextCharge = Time.time + chargeRate; 
               charges--;
-              
-              timeMode();
+
+              StartCoroutine (HyperMode());
           }
+
+          chargesText.text = "Charges: " + charges;
+
+
      }
      void FixedUpdate()
      {
@@ -70,9 +95,22 @@ public class PlayerController : MonoBehaviour
 
           rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
      }
-   
-     void timeMode()
+     IEnumerator HyperMode()
      {
-          
+          float cFire = fireRate;
+          float cSpeed = speed;
+
+          while (true)
+          {
+               chargesText.text = "ACTIVE";
+
+               fireRate = .125F;
+               speed = 10;
+               yield return new WaitForSeconds(chargeUpTime);
+               break;
+          }
+
+          fireRate = cFire;
+          speed = cSpeed;
      }
 }

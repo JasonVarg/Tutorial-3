@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
 
     private BG_Scroller background;
 
+    private StarSpeed stars;
+
     private AudioSource audioSource;
 
     void Start()
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
        StartCoroutine (SpawnWaves());
 
        GameObject backgroundObject = GameObject.FindWithTag("Background");
+       
 
         if(backgroundObject != null)
         {
@@ -121,6 +124,7 @@ public class GameController : MonoBehaviour
            gameOverText.text = "Game created by Jason Vargas";
 
            background.speedUp();
+           //stars.speedUp();
 
            audioSource.clip = winMu;
            audioSource.Play();
@@ -132,7 +136,7 @@ public class GameController : MonoBehaviour
            gameOverText.text= "You double Win!";
        }
     } 
-
+    
     public void GameOver()
     {
        gameOverText.text = "GAME OVER!";
