@@ -140,7 +140,7 @@ public class GameController : MonoBehaviour
     {
         ScoreText.text = "Points: " + score;
 
-        if(score >= 150 && player == true)
+        if(score >= 200 && player == true)
         {
             weapon.WeaponSwitcher();
         }

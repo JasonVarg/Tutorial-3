@@ -11,7 +11,7 @@ public class PlayerWeapon : MonoBehaviour
     public float fireRate;
     public float chargeUpTime;
     public float chargeRate;
-    private int charges;
+    public int charges;
     public AudioSource audioSource;
     public Text chargesText;
     
@@ -21,7 +21,6 @@ public class PlayerWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        charges = 3;
         audioSource = GetComponent<AudioSource>();
         GameObject playerGameObject = GameObject.FindWithTag("Player");
     }
