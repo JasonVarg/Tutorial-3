@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
 
     private BG_Scroller background;
 
+    private WepSwitch weapon;
+
     private StarSpeed stars;
 
     private AudioSource audioSource;
@@ -50,6 +52,8 @@ public class GameController : MonoBehaviour
        StartCoroutine (SpawnWaves());
 
        GameObject backgroundObject = GameObject.FindWithTag("Background");
+
+       GameObject weaponObject = GameObject.FindWithTag("Weapon");
        
 
         if(backgroundObject != null)
@@ -57,9 +61,19 @@ public class GameController : MonoBehaviour
             background = backgroundObject.GetComponent <BG_Scroller>();
         }
         
+        if(weaponObject != null)
+        {
+            weapon = weaponObject.GetComponent <WepSwitch>();
+        }
+        
         if (background == null)
         {
             Debug.Log("Cannot find 'background' script!");
+        }
+
+        if (weapon == null)
+        {
+            Debug.Log("Cannot find 'WepSwitch' script!");
         }
     }
 
@@ -112,10 +126,15 @@ public class GameController : MonoBehaviour
 
     void UpdateScore()
     {
-       ScoreText.text = "Points: " + score;
+        ScoreText.text = "Points: " + score;
 
-       if(score >=100)
-       {
+        if(score >= 150)
+        {
+            weapon.WeaponSwitcher();
+        }
+
+        if(score >=400)
+        {
            winText.text = "YOU WIN";
            
            gameOver= true;
@@ -128,13 +147,15 @@ public class GameController : MonoBehaviour
 
            audioSource.clip = winMu;
            audioSource.Play();
-       }
+        }
 
-       if(score >= 170)
+       if(score >= 500)
        {
            winText.text = "YOU WIN!";
            gameOverText.text= "You double Win!";
        }
+
+
     } 
     
     public void GameOver()
