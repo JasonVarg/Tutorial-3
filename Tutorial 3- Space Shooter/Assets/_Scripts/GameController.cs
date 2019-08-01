@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public Text gameOverText;
 
     public Text winText;
+    public Text controlsText;
 
     public AudioClip winMu;
     public AudioClip lossMu;
@@ -90,6 +91,7 @@ public class GameController : MonoBehaviour
     IEnumerator SpawnWaves()
     {
         yield return new WaitForSeconds (startWait);
+        controlsText.text = "";
         
         while (true)
         {

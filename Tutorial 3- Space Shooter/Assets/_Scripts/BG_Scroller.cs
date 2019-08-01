@@ -9,11 +9,14 @@ public class BG_Scroller : MonoBehaviour
     public float someLength;
 
     private Vector3 startPos;
+    private float winSpeed;
+    static float t;
 
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
+        winSpeed = -5;
     }
 
     // Update is called once per frame
@@ -26,6 +29,6 @@ public class BG_Scroller : MonoBehaviour
 
     public void speedUp()
     {
-        scrollSpeed = -5;
+       scrollSpeed = winSpeed; 
     }
 }
