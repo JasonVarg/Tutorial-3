@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 
     private WepSwitch weapon;
 
+    private PlayerController player;
+
     private StarSpeed stars;
 
     private AudioSource audioSource;
@@ -54,7 +56,8 @@ public class GameController : MonoBehaviour
        GameObject backgroundObject = GameObject.FindWithTag("Background");
 
        GameObject weaponObject = GameObject.FindWithTag("Weapon");
-       
+
+       GameObject playerObject = GameObject.FindWithTag("Player");
 
         if(backgroundObject != null)
         {
@@ -65,7 +68,12 @@ public class GameController : MonoBehaviour
         {
             weapon = weaponObject.GetComponent <WepSwitch>();
         }
-        
+        if(playerObject != null)
+        {
+            player = playerObject.GetComponent <PlayerController>();
+        }
+// Debug code
+
         if (background == null)
         {
             Debug.Log("Cannot find 'background' script!");
@@ -75,6 +83,8 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Cannot find 'WepSwitch' script!");
         }
+
+        
     }
 
     IEnumerator SpawnWaves()
@@ -128,7 +138,7 @@ public class GameController : MonoBehaviour
     {
         ScoreText.text = "Points: " + score;
 
-        if(score >= 150)
+        if(score >= 150 && player == true)
         {
             weapon.WeaponSwitcher();
         }
