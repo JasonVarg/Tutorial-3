@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
             weapon.WeaponSwitcher();
         }
 
-        if(score >=400)
+        if(score >= 600)
         {
            winText.text = "YOU WIN";
            
@@ -161,7 +161,7 @@ public class GameController : MonoBehaviour
            audioSource.Play();
         }
 
-       if(score >= 500)
+       if(score >= 700)
        {
            winText.text = "YOU WIN!";
            gameOverText.text= "You double Win!";
