@@ -36,8 +36,8 @@ public class PlayerWeapon : MonoBehaviour
             foreach(var shotSpawn in shotSpawns)
             {
                 Instantiate(shot, shotSpawn.position, shotSpawn.rotation);     
-
-                audioSource.Play();
+                
+                if(shotSpawn == true) audioSource.Play();
             }
         }
 
